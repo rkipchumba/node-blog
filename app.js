@@ -10,21 +10,25 @@ app.set('view engine', 'ejs');
 app.listen(3000)
 
 app.get('/',  (req, res) => {
-    // res.send('<h1>Hello World</h1>')
-    res.render('index')
+  const blogs = [
+    {title: 'Kev says something', snippet: 'Giggdy Giggdy Giggdy '},
+    {title: 'Kev says something', snippet: 'Giggdy Giggdy Giggdy '},
+    {title: 'Kev says something', snippet: 'Giggdy Giggdy Giggdy '}
+  ]
+  res.render('index', { title: "Home", blogs })
   })
 
 app.get('/about',  (req, res) => {
   // res.send('<h1>About page</h1>')
-  res.render('about')
+  res.render('about', { title: "About" })
 })
 
   // redirects
 app.get('/blogs/create',  (req, res) => {
-  res.render('create');
+  res.render('create', { title: "Create-Blog" });
 })
 
 // 404 page
 app.use((req, res) => {
-  res.status(404).sendFile('./views/404.html', {root: __dirname})
+  res.status(404).render( '404', { title: "404" })
 })
